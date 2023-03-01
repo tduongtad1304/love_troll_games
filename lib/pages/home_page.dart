@@ -111,11 +111,9 @@ class _HomePageState extends State<HomePage> {
                   onEnter: (_) => _changeNoBtnPosition(),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.red,
+                      backgroundColor: _randomColor(),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(18.0),
-                        side: BorderSide(color: Colors.red),
-                      ),
+                          borderRadius: BorderRadius.circular(18.0)),
                       padding: const EdgeInsets.only(
                           top: 20, bottom: 20, right: 30, left: 30),
                     ),
@@ -141,5 +139,9 @@ class _HomePageState extends State<HomePage> {
     final dx = Random().nextDouble() * 2 - 1;
     final dy = Random().nextDouble() * 2 - 1;
     return Offset(dx, dy);
+  }
+
+  Color _randomColor() {
+    return Color((Random().nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0);
   }
 }
