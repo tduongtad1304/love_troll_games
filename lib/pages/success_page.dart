@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Success extends StatelessWidget {
-  const Success({Key? key}) : super(key: key);
+class SuccessPage extends StatelessWidget {
+  const SuccessPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -9,11 +9,6 @@ class Success extends StatelessWidget {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         toolbarHeight: 80,
-        title: Text(
-          'Success 😍',
-          style: TextStyle(color: Colors.white, fontSize: 24),
-        ),
-        centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
@@ -37,9 +32,9 @@ class Success extends StatelessWidget {
           child: Text(
             'I love you 3000 💖💖',
             style: TextStyle(
-              fontSize: 25,
+              fontSize: 40,
               fontWeight: FontWeight.w500,
-              color: Colors.white,
+              color: Colors.pinkAccent,
             ),
           ),
         ),
