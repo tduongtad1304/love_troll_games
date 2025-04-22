@@ -11,21 +11,14 @@ class SuccessPage extends StatelessWidget {
         toolbarHeight: 80,
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          icon: Icon(
-            Icons.arrow_back_ios,
-            color: Colors.white,
-          ),
-        ),
       ),
       body: Container(
         constraints: BoxConstraints.expand(),
         decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("assets/heart.jpg"), fit: BoxFit.cover),
+            image: AssetImage("assets/heart.jpg"),
+            fit: BoxFit.cover,
+          ),
         ),
         child: Align(
           alignment: Alignment(0, 0.5),

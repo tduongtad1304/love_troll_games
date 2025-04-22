@@ -28,7 +28,9 @@ class _HomePageState extends State<HomePage> {
         constraints: BoxConstraints.expand(),
         decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("assets/rose.jpg"), fit: BoxFit.cover),
+            image: AssetImage("assets/rose.jpg"),
+            fit: BoxFit.cover,
+          ),
         ),
         child: Stack(
           children: [
@@ -37,39 +39,32 @@ class _HomePageState extends State<HomePage> {
                 const Expanded(
                   child: Align(
                     alignment: Alignment(0, 0.5),
-                    child: Text('Spring 🌸 Do you love me?, Tad always love you',
-                        style: TextStyle(
-                          fontSize: 25,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.white,
-                        )),
+                    child: Text(
+                      'Spring 🌸 Do you love me?\nTad always loves you babe 🥰😊',
+                      style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                 ),
                 Expanded(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.teal,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(18.0),
-                            side: BorderSide(color: Colors.teal),
-                          ),
-                          padding: const EdgeInsets.only(
-                              top: 20, bottom: 20, right: 30, left: 30),
-                        ),
-                        onHover: (_isHovered) {
-                          setState(() {
-                            _isHovered = !_isHovered;
-                            _changeNoBtnPosition();
-                          });
-                        },
+                      _askButton(
+                        color: Colors.teal,
+                        textButton: 'Yes',
                         onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => SuccessPage()));
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => SuccessPage(),
+                            ),
+                          );
                         },
-                        child: const Text('Yes'),
+                        onHover: (_) => _changeNoBtnPosition(),
                       ),
                       Visibility(
                         maintainState: true,
@@ -80,19 +75,8 @@ class _HomePageState extends State<HomePage> {
                               _showingInitialPositionNoBtn = false;
                             });
                           },
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.red,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18.0),
-                                side: BorderSide(color: Colors.red),
-                              ),
-                              padding: const EdgeInsets.only(
-                                  top: 20, bottom: 20, right: 30, left: 30),
-                            ),
-                            onPressed: () {},
-                            child: const Text('No'),
-                          ),
+                          child:
+                              _askButton(color: Colors.red, textButton: 'No'),
                         ),
                       ),
                     ],
@@ -108,19 +92,8 @@ class _HomePageState extends State<HomePage> {
               child: Visibility(
                 visible: !_showingInitialPositionNoBtn,
                 child: MouseRegion(
-                  onEnter: (_) => _changeNoBtnPosition(),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: _randomColor(),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(18.0)),
-                      padding: const EdgeInsets.only(
-                          top: 20, bottom: 20, right: 30, left: 30),
-                    ),
-                    onPressed: () {},
-                    child: const Text('No'),
-                  ),
-                ),
+                    onEnter: (_) => _changeNoBtnPosition(),
+                    child: _askButton(color: _randomColor, textButton: 'No')),
               ),
             ),
           ],
@@ -141,7 +114,32 @@ class _HomePageState extends State<HomePage> {
     return Offset(dx, dy);
   }
 
-  Color _randomColor() {
+  Color get _randomColor {
     return Color((Random().nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0);
+  }
+
+  ElevatedButton _askButton({
+    required Color color,
+    VoidCallback? onPressed,
+    required String textButton,
+    Function(bool)? onHover,
+  }) {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: color,
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(18.0)),
+        padding:
+            const EdgeInsets.only(top: 20, bottom: 20, right: 30, left: 30),
+      ),
+      onPressed: onPressed ?? () {},
+      onHover: onHover,
+      child: Text(
+        textButton,
+        style: TextStyle(
+          color: Colors.black,
+        ),
+      ),
+    );
   }
 }
